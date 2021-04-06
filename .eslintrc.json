@@ -26,6 +26,7 @@
     "rules": {
         "prettier/prettier": "error",
         "class-methods-use-this": "off",
+        "camelcase": "off",
         "no-useless-constructor": "off",
         "@typescript-eslint/camelcase": "off",
         "no-console": "off",
@@ -54,4 +55,3 @@
         }
     }
   }
-  
