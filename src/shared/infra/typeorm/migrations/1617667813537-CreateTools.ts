@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+    MigrationInterface,
+    QueryRunner,
+    Table,
+    TableForeignKey,
+} from 'typeorm';
 
 export default class CreateTools1617667813537 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
@@ -14,12 +19,18 @@ export default class CreateTools1617667813537 implements MigrationInterface {
                         default: 'uuid_generate_v4()',
                     },
                     {
+                        name: 'user_id',
+                        type: 'uuid',
+                    },
+                    {
                         name: 'title',
                         type: 'varchar',
+                        isUnique: true,
                     },
                     {
                         name: 'link',
                         type: 'varchar',
+                        isUnique: true,
                     },
                     {
                         name: 'description',
@@ -36,6 +47,18 @@ export default class CreateTools1617667813537 implements MigrationInterface {
                         default: 'now()',
                     },
                 ],
+            }),
+        );
+
+        await queryRunner.createForeignKey(
+            'tools',
+            new TableForeignKey({
+                name: 'UserProvider',
+                columnNames: ['user_id'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'users',
+                onDelete: 'SET NULL',
+                onUpdate: 'CASCADE',
             }),
         );
     }

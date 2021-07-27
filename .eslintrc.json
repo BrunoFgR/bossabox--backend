@@ -26,6 +26,7 @@
     "rules": {
         "prettier/prettier": "error",
         "class-methods-use-this": "off",
+        "array-callback-return": "off",
         "camelcase": "off",
         "no-useless-constructor": "off",
         "@typescript-eslint/camelcase": "off",

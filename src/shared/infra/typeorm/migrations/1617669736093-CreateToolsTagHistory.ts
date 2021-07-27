@@ -10,7 +10,7 @@ export default class CreateToolsTagHistory1617669736093
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: 'tools_tags_history',
+                name: 'tools_tags_tags',
                 columns: [
                     {
                         name: 'id',
@@ -20,11 +20,11 @@ export default class CreateToolsTagHistory1617669736093
                         default: 'uuid_generate_v4()',
                     },
                     {
-                        name: 'tag_id',
+                        name: 'tagsId',
                         type: 'uuid',
                     },
                     {
-                        name: 'tool_id',
+                        name: 'toolsId',
                         type: 'uuid',
                     },
                     {
@@ -42,10 +42,10 @@ export default class CreateToolsTagHistory1617669736093
         );
 
         await queryRunner.createForeignKey(
-            'tools_tags_history',
+            'tools_tags_tags',
             new TableForeignKey({
                 name: 'ToolsProvider',
-                columnNames: ['tool_id'],
+                columnNames: ['toolsId'],
                 referencedColumnNames: ['id'],
                 referencedTableName: 'tools',
                 onDelete: 'SET NULL',
@@ -54,10 +54,10 @@ export default class CreateToolsTagHistory1617669736093
         );
 
         await queryRunner.createForeignKey(
-            'tools_tags_history',
+            'tools_tags_tags',
             new TableForeignKey({
                 name: 'TagsProvider',
-                columnNames: ['tag_id'],
+                columnNames: ['tagsId'],
                 referencedColumnNames: ['id'],
                 referencedTableName: 'tags',
                 onDelete: 'SET NULL',
@@ -67,8 +67,8 @@ export default class CreateToolsTagHistory1617669736093
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropForeignKey('tools_tag_history', 'ToolsProvider');
-        await queryRunner.dropForeignKey('tools_tags_history', 'TagsProvider');
-        await queryRunner.dropTable('tools_tags_history');
+        await queryRunner.dropForeignKey('tools_tags_tags', 'ToolsProvider');
+        await queryRunner.dropForeignKey('tools_tags_tags', 'TagsProvider');
+        await queryRunner.dropTable('tools_tags_tags');
     }
 }
